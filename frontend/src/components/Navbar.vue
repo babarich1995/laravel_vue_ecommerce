@@ -53,7 +53,7 @@
                   <MenuItems class="absolute right-0 mt-10 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div class="px-1 py-1">
                       <MenuItem  v-slot="{ active }">
-                      <a  :class="[active ? 'bg-gray-100' :
+                      <a  @click="logout" :class="[active ? 'bg-gray-100' :
                        '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">Sign Out</a>
                     </MenuItem>
                     </div>
@@ -82,7 +82,7 @@ ShoppingCartIcon} from '@heroicons/vue/24/outline';
 import {Menu, MenuButton, MenuItems, MenuItem} from '@headlessui/vue';
 import {ChevronDownIcon} from '@heroicons/vue/24/solid';
 import {useRoute,useRouter, RouterLink} from 'vue-router';
-
+import { useAuthStore } from "../store/authStore";
 
 const navigation = [
     { name: "Dashboard", to: { name: "Dashboard" } },
@@ -95,11 +95,19 @@ const navigation = [
   const currentRouteName = computed(() => {
       return useRoute().name
     })
-
+   const store = useAuthStore()
    
+   function logout() {
+    store.logout()
+    .then(()=>{
+     router.push({
+      name:'Login'
+    })
+    })
+   
+  }
     
 function goHome(){
-    
     router.push({name:"Dashboard"})
 }
 

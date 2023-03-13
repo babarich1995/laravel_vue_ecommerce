@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
+import Products from "../views/products/index.vue"
 import AuthLayout from "../layouts/AuthLayout.vue"
 import AppLayout from "../layouts/AppLayout.vue"
 import Login from "../views/auth/Login.vue";
@@ -15,8 +16,12 @@ const routes = [
         component:AppLayout,
         meta:{requiresAuth:true},
         children:[
-          { path: "/dashboard", name:'Dashboard', component: Dashboard}
-           
+          { path: "/dashboard", name:'Dashboard', component: Dashboard},
+          {
+            path: 'products',
+            name: 'Products',
+            component: Products
+          },
         ]
       },
 
@@ -57,9 +62,9 @@ const router = createRouter({
 
 router.beforeEach((to,from,next)=>{
     const store = useAuthStore();
-    if(to.meta.requiresAuth && !store.user.token){
+    if(to.meta.requiresAuth && !store.token){
         next({name:'Login'})
-    }else if(store.user.token && (to.meta.isGuest)){
+    }else if(store.token && (to.meta.isGuest)){
         next({name:'Dashboard'})
     }else {
         next()

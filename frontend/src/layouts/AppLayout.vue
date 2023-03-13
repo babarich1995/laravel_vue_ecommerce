@@ -3,7 +3,7 @@
     <NavBar @toggle-sidebar="toggleSidebar"/>
   
     <sidenav :class="{'-ml-[250px]': !sidebarOpened}"/>
- 
+      
       <main class="p-6 ml-0 lg:ml-64 xl:ml-64 xxl:ml-64">
         <router-view></router-view>
          

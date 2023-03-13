@@ -1,5 +1,8 @@
 <template>
-<h1>hi am dashboard</h1>
+<div class="mt-20">
+ <h1>hi am dashboard</h1>   
+</div>
+
 </template>
 
 <script>

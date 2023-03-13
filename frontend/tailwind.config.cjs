@@ -5,7 +5,12 @@
         "./src/**/*.{vue,js,ts,jsx,tsx}",
     ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#49869A",
+
+      },
+    },
   },
   plugins: [
   require('@tailwindcss/forms')
