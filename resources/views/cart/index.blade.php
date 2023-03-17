@@ -38,7 +38,7 @@
                                     <div class="flex justify-between mb-3">
                                         <h3 x-text="product.title"></h3>
                                         <span class="text-lg font-semibold">
-                                            $<span x-text="product.price"></span>
+                                            Tsh<span x-text="product.price"></span>
                                         </span>
                                     </div>
                                     <div class="flex justify-between items-center">
@@ -70,13 +70,13 @@
                     <div class="border-t border-gray-300 pt-4">
                         <div class="flex justify-between">
                             <span class="font-semibold">Subtotal</span>
-                            <span id="cartTotal" class="text-xl" x-text="`$${cartTotal}`"></span>
+                            <span id="cartTotal" class="text-xl" x-text="`Tsh${cartTotal}`"></span>
                         </div>
                         <p class="text-gray-500 mb-6">
                             Shipping and taxes calculated at checkout.
                         </p>
 
-                        <form action="{{route('cart.checkout')}}" method="post">
+                        <form  method="post">
                             @csrf
                             <button type="submit" class="btn-primary w-full py-3 text-lg">
                                 Proceed to Checkout

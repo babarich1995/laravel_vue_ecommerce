@@ -12,14 +12,12 @@ use Illuminate\Support\Facades\Cookie;
 class CartController extends Controller
 {
     public function index(){
-       $cartItems = Cart::getCartItems();
-       $ids = Arr::pluck($cartItems, 'product_id');
-       $products = Product::query()->whereIn('id', $ids)->get();
-       $cartItems = Arr::keyBy('product_id', $cartItems);
+        list($products, $cartItems) = Cart::getProductsAndCartItems();
        $total= 0;
-
+       
        foreach($products as $product){
         $total += $product->price * $cartItems[$product->id]['quantity'];
+        
        }
 
        return view('cart.index', compact('products','cartItems','total'));

@@ -87,6 +87,7 @@ import CustomInput from "../../components/core/CustomInput.vue";
 import NButtonLoading from "../../components/core/NButtonLoading.vue";
 import Spinner from "../../components/core/Spinner.vue";
 import { useProductStore } from '../../store/productStore';
+import {useNotifyStore} from '../../store/notifyStore'
 
 const product = ref({
   id: props.product.id,
@@ -99,6 +100,7 @@ const product = ref({
 
 
 const store = useProductStore()
+const notifyStore = useNotifyStore()
 const loading = ref(false)
 
 const props = defineProps({
@@ -139,6 +141,10 @@ function onSubmit() {
       .then(response => {
         loading.value = false;
         if (response.status === 200) {
+           notifyStore.notify({
+             type: "success",
+             message: "The product was successfully updated",
+             });
           store.getProducts()
           closeModal()
         }
@@ -148,14 +154,20 @@ function onSubmit() {
       .then(response => {
         loading.value = false;
         if (response.status === 201) {
-          // TODO show notification
+            notifyStore.notify({
+             type: "success",
+             message: "The product was successfully created",
+             });
           store.getProducts()
           closeModal()
         }
       })
       .catch(err => {
         loading.value = false;
-        debugger;
+          notifyStore.notify({
+             type: "error",
+             message: "Sorry there is something wrong with your request",
+             });
       })
   }
 }

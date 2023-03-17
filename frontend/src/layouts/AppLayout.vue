@@ -6,7 +6,7 @@
       
       <main class="p-6 ml-0 lg:ml-64 xl:ml-64 xxl:ml-64">
         <router-view></router-view>
-         
+         <Notification/>
       </main>
 
     
@@ -20,6 +20,7 @@
   <script setup>
   import {ref, onMounted, onUnmounted} from 'vue'
   import  NavBar from '../components/Navbar.vue'
+  import Notification from '../components/Notification.vue'
   import Sidenav from '../components/sidebar/index.vue'
 
 const {title} = defineProps({

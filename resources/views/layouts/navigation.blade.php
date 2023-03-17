@@ -1,6 +1,11 @@
 <header
-    
-    class="flex justify-between bg-gray-50 shadow-md"
+x-data="{
+        mobileMenuOpen: false,
+        cartItemsCount: {{ \App\Helpers\Cart::getCartItemsCount() }},
+    }"
+    @cart-change.window="cartItemsCount = $event.detail.count"
+    class="flex justify-between bg-gray-100  shadow-md text-gray-900"
+   
 >
     <div>
         <a href="{{ route('home') }}" class="block py-navbar-item pl-5 font-bold text-2xl"> BabaShop </a>
@@ -9,11 +14,12 @@
     <div
         class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-gray-50 md:hidden"
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'"
+        
     >
         <ul>
             <li>
                 <a
-                    
+                href="{{ route('cart.index') }}"
                     class="relative flex items-center justify-between py-2 px-3 transition-colors hover:bg-gray-200"
                 >
                     <div class="flex items-center">
@@ -33,7 +39,13 @@
                         </svg>
                         Cart
                     </div>
-                   
+                    <small
+                        x-show="cartItemsCount"
+                        x-transition
+                        x-text="cartItemsCount"
+                        x-cloak
+                        class="py-[2px] px-[8px] rounded-full bg-red-500 text-white"
+                    ></small>
                 </a>
             </li>
             @if (!Auth::guest())
@@ -78,7 +90,7 @@
                         class="z-10 right-0 bg-slate-800 py-2"
                     >
                         <li>
-                            <a href="{{ route('profile') }}" class="flex px-3 py-2 hover:bg-gray-200">
+                            <a  class="flex px-3 py-2 hover:bg-gray-200">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="h-5 w-5 mr-2"
@@ -186,7 +198,7 @@
         <ul class="grid grid-flow-col items-center">
             <li>
                 <a
-                   
+                href="{{ route('cart.index') }}"
                     class="relative inline-flex items-center py-navbar-item px-navbar-item hover:bg-gray-200"
                 >
                     <svg
@@ -204,7 +216,13 @@
                         />
                     </svg>
                     Cart
-                   
+                    <small
+                        x-show="cartItemsCount"
+                        x-transition
+                        x-cloak
+                        x-text="cartItemsCount"
+                        class="absolute z-[100] top-4 -right-3 py-[2px] px-[8px] rounded-full bg-red-500 text-white"
+                    ></small>
                 </a>
             </li>
             @if (!Auth::guest())
@@ -252,7 +270,7 @@
                     >
                         <li>
                             <a
-                                href="{{ route('profile') }}"
+                                
                                 class="flex px-3 py-2 hover:bg-gray-200"
                             >
                                 <svg
@@ -274,7 +292,7 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('order.index') }}"
+                                
                                 class="flex px-3 py-2 hover:bg-gray-200"
                             >
                                 <svg

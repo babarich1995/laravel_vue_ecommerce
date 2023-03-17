@@ -1,6 +1,7 @@
 import './bootstrap';
-import './http';
+
 import Alpine from 'alpinejs';
+import {get, post} from './http.js';
 
 window.Alpine = Alpine;
 document.addEventListener('alpine:init', async ()=>{
